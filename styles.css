@@ -85,7 +85,8 @@ img {
 
 .logo-img {
     height: 40px;
-    width: auto;
+    width: 40px;
+    object-fit: cover;
     border-radius: 50%;
 }
 
@@ -233,9 +234,7 @@ img {
 
 .grid-proyectos { 
     display: grid; 
-    /* MODIFICADO: Usamos un tamaño fijo para las columnas en lugar de un rango */
     grid-template-columns: repeat(auto-fit, 320px); 
-    /* AÑADIDO: Centramos la grilla para que se vea bien en pantallas anchas */
     justify-content: center;
     gap: 30px; 
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
@@ -254,7 +253,6 @@ img {
     overflow: hidden; 
     box-shadow: var(--sombra); 
     transition: all 0.4s ease-out;
-    /* AÑADIDO: Damos una altura mínima para consistencia visual */
     min-height: 420px;
     display: flex;
     flex-direction: column;
@@ -291,7 +289,7 @@ img {
 .boton-enviar { width: 100%; padding: 15px; background: var(--color-acento); color: white; border: none; border-radius: var(--borde-redondeado); font-size: 1rem; font-weight: 500; cursor: pointer; transition: var(--transicion); text-transform: uppercase; letter-spacing: 1px; }
 .boton-enviar:hover { background: #c0392b; transform: translateY(-3px); }
 
-.info-contacto { text-align: center; margin-bottom: 40px; font-size: 1.1rem; }
+.info-contacto { text-align: center; margin-bottom: 40px; font-size: 1.1rem; line-height: 1.8; }
 .info-contacto p { margin-bottom: 10px; }
 .info-contacto a { color: var(--color-acento); font-weight: 500; }
 .info-contacto a:hover { text-decoration: underline; }
@@ -299,6 +297,34 @@ img {
 /* Footer */
 .pie-pagina { background: var(--color-primario); color: white; padding: 25px 0; text-align: center; }
 .pie-pagina p { font-size: 0.9rem; opacity: 0.8; }
+
+/* Botón Flotante de WhatsApp */
+.whatsapp-float {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #25D366;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    transition: transform 0.3s ease;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+}
+
+.whatsapp-icon {
+    width: 32px;
+    height: 32px;
+    fill: white;
+}
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -312,9 +338,18 @@ img {
     .filter-buttons { gap: 10px; }
     .filter-btn { padding: 8px 18px; font-size: 0.9rem; }
     .grid-proyectos {
-        /* Hacemos que la grilla ocupe el espacio en móvil */
         grid-template-columns: 1fr;
-        max-width: 340px; /* Evita que se agrande demasiado en tablets */
+        max-width: 340px;
         margin: 0 auto;
+    }
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+    }
+    .whatsapp-icon {
+        width: 28px;
+        height: 28px;
     }
 }

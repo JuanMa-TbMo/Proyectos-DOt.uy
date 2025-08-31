@@ -32,7 +32,7 @@ const projectsData = [
         id: 4,
         title: "Campaña para chef personal",
         description: "Estrategia de redes sociales y anuncios que incrementó las reservas en un 75% en tres meses.",
-        imageSrc: "https://via.placeholder.com/400x250/2c3e50/FFFFFF?text=Marketing+Digital",
+        imageSrc: "imgs/chef.png",
         altText: "Proyecto Marketing Digital",
         tag: "Marketing Digital",
         categories: ["marketing"]
@@ -49,8 +49,8 @@ const projectsData = [
     {
         id: 6,
         title: "Videos para Redes Sociales",
-        description: "Creación de una serie de Reels y TikToks virales para una marca de bebidas energéticas.",
-        imageSrc: "https://via.placeholder.com/400x250/3498db/FFFFFF?text=Edición+de+Video",
+        description: "Creación de una serie de Reels y TikToks virales para una influencer.",
+        imageSrc: "/imgs/lajefaok.png",
         altText: "Proyecto Edición de Contenido",
         tag: "Edición de Video",
         categories: ["edicion"]
