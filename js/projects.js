@@ -2,6 +2,44 @@
 
 const projectsData = [
     {
+        id: 1,
+        title: "Fotografía de Producto",
+        description: "Sesión de fotos de alta calidad para un anuncio con Franui",
+        imageSrc: "/imgs/Franui_torta_1.jpeg",
+        altText: "Proyecto Fotografía",
+        tag: "Fotografía",
+        categories: ["fotografia"]
+    },
+    {
+        id: 2,
+        title: "Videos para Redes Sociales",
+        description: "Creación de una serie de Reels y TikToks virales para una influencer.",
+        imageSrc: "/imgs/lajefaok.png",
+        altText: "Proyecto Edición de Contenido",
+        tag: "Edición de Video",
+        categories: ["edicion"]
+    },
+    
+    {
+        id: 3,
+        title: "Web para constructora",
+        description: "Desarrollo de un sitio web moderno y autogestionable para una cosntructora.",
+        imageSrc: "/imgs/web_const.png",
+        altText: "Proyecto Página Web",
+        tag: "Página Web",
+        categories: ["web"]
+    },
+     {
+        id: 4,
+        title: "Campaña para chef personal",
+        description: "Estrategia de redes sociales y anuncios que incrementó las reservas en un 75% en tres meses.",
+        imageSrc: "imgs/chef.png",
+        altText: "Proyecto Marketing Digital",
+        tag: "Marketing Digital",
+        categories: ["marketing"]
+    },
+    
+    {
         id: 5,
         title: "Convidanos Alfajores Artesanales",
         description: "Desarrollo de identidad visual y plataforma e-commerce para esta marca, aumentando sus ventas en un 120%.",
@@ -28,40 +66,5 @@ const projectsData = [
         tag: "SaaS",
         categories: ["web"]
     },
-    {
-        id: 4,
-        title: "Campaña para chef personal",
-        description: "Estrategia de redes sociales y anuncios que incrementó las reservas en un 75% en tres meses.",
-        imageSrc: "imgs/chef.png",
-        altText: "Proyecto Marketing Digital",
-        tag: "Marketing Digital",
-        categories: ["marketing"]
-    },
-    {
-        id: 1,
-        title: "Fotografía de Producto",
-        description: "Sesión de fotos de alta calidad para un anuncio con Franui",
-        imageSrc: "/imgs/Franui_torta_1.jpeg",
-        altText: "Proyecto Fotografía",
-        tag: "Fotografía",
-        categories: ["fotografia"]
-    },
-    {
-        id: 2,
-        title: "Videos para Redes Sociales",
-        description: "Creación de una serie de Reels y TikToks virales para una influencer.",
-        imageSrc: "/imgs/lajefaok.png",
-        altText: "Proyecto Edición de Contenido",
-        tag: "Edición de Video",
-        categories: ["edicion"]
-    },
-    {
-        id: 3,
-        title: "Web para constructora",
-        description: "Desarrollo de un sitio web moderno y autogestionable para una cosntructora.",
-        imageSrc: "/imgs/web_const.png",
-        altText: "Proyecto Página Web",
-        tag: "Página Web",
-        categories: ["web"]
-    }
+   
 ];
