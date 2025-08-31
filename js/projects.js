@@ -2,7 +2,7 @@
 
 const projectsData = [
     {
-        id: 1,
+        id: 5,
         title: "Convidanos Alfajores Artesanales",
         description: "Desarrollo de identidad visual y plataforma e-commerce para esta marca, aumentando sus ventas en un 120%.",
         imageSrc: "imgs/proyecto2.jpeg",
@@ -11,7 +11,7 @@ const projectsData = [
         categories: ["identidad", "web"]
     },
     {
-        id: 2,
+        id: 7,
         title: "Presenta tu Joyería",
         description: "Diseño de catálogo digital interactivo para joyería artesanal, destacando la artesanía local.",
         imageSrc: "imgs/proyecto1.jpeg",
@@ -20,7 +20,7 @@ const projectsData = [
         categories: ["identidad"]
     },
     {
-        id: 3,
+        id: 6,
         title: "Expande Tu Gimnasio",
         description: "Sistema de gestión integral para gimnasios que optimizó la administración y fidelización de clientes.",
         imageSrc: "imgs/proyecto5.jpeg",
@@ -38,7 +38,7 @@ const projectsData = [
         categories: ["marketing"]
     },
     {
-        id: 5,
+        id: 1,
         title: "Fotografía de Producto",
         description: "Sesión de fotos de alta calidad para un anuncio con Franui",
         imageSrc: "/imgs/Franui_torta_1.jpeg",
@@ -47,7 +47,7 @@ const projectsData = [
         categories: ["fotografia"]
     },
     {
-        id: 6,
+        id: 2,
         title: "Videos para Redes Sociales",
         description: "Creación de una serie de Reels y TikToks virales para una influencer.",
         imageSrc: "/imgs/lajefaok.png",
@@ -56,7 +56,7 @@ const projectsData = [
         categories: ["edicion"]
     },
     {
-        id: 7,
+        id: 3,
         title: "Web para constructora",
         description: "Desarrollo de un sitio web moderno y autogestionable para una cosntructora.",
         imageSrc: "/imgs/web_const.png",
