@@ -14,7 +14,7 @@ const projectsData = [
         id: 2,
         title: "Videos para Redes Sociales",
         description: "Creación de una serie de Reels y TikToks virales para una influencer.",
-        imageSrc: "/imgs/lajefaok.png",
+        imageSrc: "/imgs/Tiktok.png",
         altText: "Proyecto Edición de Contenido",
         tag: "Edición de Video",
         categories: ["edicion"]
