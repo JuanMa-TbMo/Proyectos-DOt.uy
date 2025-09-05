@@ -7,8 +7,8 @@
     --color-texto-claro: #fff;
     --color-fondo: #ffffff;
     --color-fondo-claro: #f5f7fa;
-    --sombra: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --transicion: all 0.3s ease;
+    --sombra: 0 4px 6px rgba(0, 0, 0, 0.05);
+    --transicion: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     --borde-redondeado: 8px;
 }
 
@@ -25,7 +25,7 @@ body {
     line-height: 1.6;
     color: var(--color-texto);
     background-color: var(--color-fondo);
-    padding-top: 70px; /* Espacio para el navbar fijo */
+    padding-top: 70px;
 }
 
 h1, h2, h3, h4 {
@@ -55,10 +55,32 @@ img {
     background-color: var(--color-fondo-claro);
 }
 
+/* --- Keyframes para las animaciones --- */
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
+
 /* Navbar */
 .navbar {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
     border-bottom: 1px solid #eee;
     padding: 15px 0;
     position: fixed;
@@ -66,7 +88,11 @@ img {
     left: 0;
     width: 100%;
     z-index: 1000;
-    transition: var(--transicion);
+    transition: box-shadow 0.3s ease;
+}
+
+.navbar.scrolled {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
 .navbar .contenedor {
@@ -101,25 +127,80 @@ img {
 .nav-menu a {
     color: var(--color-primario);
     font-weight: 500;
-    transition: var(--transicion);
+    position: relative;
+    padding-bottom: 5px;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-secundario);
+    transition: width 0.3s ease-in-out;
+}
+
+.nav-menu a:hover::after {
+    width: 100%;
 }
 
 .nav-menu a:hover {
     color: var(--color-secundario);
 }
 
+
 .boton-nav {
     padding: 8px 18px;
     background: var(--color-acento);
     color: white;
     border-radius: 50px;
+    transition: var(--transicion);
 }
 .boton-nav:hover {
     background: #c0392b;
     color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/* Sección Home */
+/* --- ESTILOS PARA MENÚ HAMBURGUESA --- */
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001;
+}
+
+.hamburger {
+    display: block;
+    position: relative;
+    width: 24px;
+    height: 2px;
+    background-color: var(--color-primario);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-primario);
+    transition: transform 0.3s ease, top 0.3s ease, bottom 0.3s ease;
+}
+
+.hamburger::before { top: -8px; }
+.hamburger::after { bottom: -8px; }
+
+
+/* --- Sección Home --- */
 #home.full-screen {
     height: calc(100vh - 70px);
     display: flex;
@@ -154,6 +235,8 @@ img {
     font-size: 3.2rem;
     margin-bottom: 15px;
     font-weight: 700;
+    opacity: 0;
+    animation: fadeInSlideUp 0.8s ease-out 0.5s forwards;
 }
 
 .contenido-home p {
@@ -162,11 +245,30 @@ img {
     color: rgba(255, 255, 255, 0.9);
 }
 
+.contenido-home p.typing-effect {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 3px solid rgba(255, 255, 255, 0.75);
+    width: 0;
+    animation: 
+        typing 2s steps(45, end) 1.5s forwards,
+        blink 0.75s step-end infinite;
+}
+
+.contenido-home p.sub-effect {
+    opacity: 0;
+    animation: fadeInSlideUp 0.8s ease-out 2.5s forwards; 
+}
+
 .opciones {
     display: flex;
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeInSlideUp 0.8s ease-out 3.5s forwards;
+
 }
 
 .boton {
@@ -184,7 +286,8 @@ img {
 
 .boton:hover {
     background: rgba(255, 255, 255, 0.15);
-    transform: translateY(-3px);
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
 .boton-cta {
@@ -204,15 +307,27 @@ img {
 .texto-destacado { text-align: center; font-size: 1.3rem; line-height: 1.7; max-width: 850px; margin: 0 auto; }
 .texto-destacado strong { color: var(--color-secundario); }
 
-/* Sección Servicios */
-.grid-servicios { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; text-align: center; }
+/* --- SECCIÓN SERVICIOS --- */
+.grid-servicios {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    text-align: center;
+}
+
 .servicio-item { background: white; padding: 30px; border-radius: var(--borde-redondeado); box-shadow: var(--sombra); transition: var(--transicion); }
-.servicio-item:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); }
-.servicio-icono { margin: 0 auto 20px; border-radius: 50%; }
+.servicio-item:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 15px 30px rgba(44, 62, 80, 0.12);
+}
+.servicio-icono { margin: 0 auto 20px; border-radius: 50%; transition: transform 0.3s ease; }
+.servicio-item:hover .servicio-icono {
+    transform: scale(1.1);
+}
 .servicio-item h3 { margin-bottom: 10px; color: var(--color-primario); }
 
 
-/* ======== NUEVOS ESTILOS PARA LA SECCIÓN DE PLANES ======== */
+/* ======== SECCIÓN DE PLANES ======== */
 .grid-planes {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -232,10 +347,9 @@ img {
     position: relative;
     overflow: hidden;
 }
-
 .plan-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 12px 24px rgba(44, 62, 80, 0.15);
 }
 
 .plan-recomendado {
@@ -284,14 +398,14 @@ img {
     color: #666;
     margin-bottom: 25px;
     text-align: center;
-    flex-grow: 1; /* Empuja el botón hacia abajo */
+    flex-grow: 1; 
 }
 
 .plan-features {
     list-style: none;
     margin-bottom: 30px;
     padding: 0;
-    flex-grow: 2; /* Empuja el botón hacia abajo */
+    flex-grow: 2; 
 }
 
 .plan-features li {
@@ -321,12 +435,13 @@ img {
     border-radius: var(--borde-redondeado);
     font-weight: 600;
     transition: var(--transicion);
-    margin-top: auto; /* Se alinea al final */
+    margin-top: auto; 
 }
 
 .boton-plan:hover {
     background-color: var(--color-secundario);
     color: white;
+    box-shadow: 0 5px 10px rgba(52, 152, 219, 0.3);
 }
 
 .boton-plan-cta {
@@ -338,7 +453,6 @@ img {
     background-color: #2980b9;
     border-color: #2980b9;
 }
-/* ======== FIN DE LOS NUEVOS ESTILOS ======== */
 
 
 /* Sección Casos de Éxito */
@@ -364,22 +478,23 @@ img {
     transition: var(--transicion);
     font-family: 'Poppins', sans-serif;
 }
-.filter-btn:hover { background-color: var(--color-secundario); color: white; }
-.filter-btn.active { background-color: var(--color-secundario); color: white; }
+.filter-btn:hover, .filter-btn.active { 
+    background-color: var(--color-secundario); 
+    color: white; 
+    transform: translateY(-3px);
+}
 
 .grid-proyectos { 
     display: grid; 
     grid-template-columns: repeat(auto-fit, 320px); 
     justify-content: center;
     gap: 30px; 
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    transition: opacity 0.4s ease-in-out;
     opacity: 1;
-    transform: scale(1);
 }
 
 .grid-proyectos.fading-out {
     opacity: 0;
-    transform: scale(0.98);
 }
 
 .proyecto { 
@@ -387,30 +502,31 @@ img {
     border-radius: var(--borde-redondeado); 
     overflow: hidden; 
     box-shadow: var(--sombra); 
-    transition: all 0.4s ease-out;
+    transition: var(--transicion);
     min-height: 420px;
     display: flex;
     flex-direction: column;
 }
 
 .proyecto:hover { 
-    transform: translateY(-10px); 
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); 
+    transform: translateY(-12px); 
+    box-shadow: 0 15px 30px rgba(44, 62, 80, 0.12); 
 }
 
 .imagen-proyecto { height: 200px; overflow: hidden; }
-.imagen-proyecto img { width: 100%; height: 100%; object-fit: cover; transition: var(--transicion); }
-.proyecto:hover .imagen-proyecto img { transform: scale(1.05); }
+.imagen-proyecto img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.proyecto:hover .imagen-proyecto img { transform: scale(1.08); }
 .proyecto h3 { padding: 20px 20px 10px; font-size: 1.3rem; color: var(--color-primario); }
 .proyecto p { padding: 0 20px 20px; color: #666; font-size: 0.95rem; flex-grow: 1; }
 .etiqueta { display: inline-block; background: var(--color-secundario); color: white; padding: 5px 15px; border-radius: 50px; font-size: 0.8rem; margin: 0 20px 20px; }
 
 /* Sección Por Qué Elegirnos */
-#por-que-elegirnos {
-    background-color: #fff;
-}
 .grid-elegirnos { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-.elegirnos-item { background-color: var(--color-fondo-claro); padding: 30px; border-left: 5px solid var(--color-secundario); border-radius: var(--borde-redondeado); }
+.elegirnos-item { background-color: var(--color-fondo-claro); padding: 30px; border-left: 5px solid var(--color-secundario); border-radius: 0 var(--borde-redondeado) var(--borde-redondeado) 0; transition: var(--transicion); }
+.elegirnos-item:hover {
+    background-color: #eaf4fb;
+    border-left-color: var(--color-acento);
+}
 .elegirnos-item h3 { margin-bottom: 10px; color: var(--color-primario); }
 
 /* Sección Nosotros (Simple) */
@@ -418,14 +534,14 @@ img {
 .contenido-nosotros-simple p { font-size: 1.1rem; color: #555; }
 
 /* Sección Contacto */
-.formulario-contacto { max-width: 700px; margin: 0 auto; background: var(--color-fondo-claro); padding: 40px; border-radius: var(--borde-redondeado); }
+.formulario-contacto { max-width: 700px; margin: 0 auto; background: #fff; padding: 40px; border-radius: var(--borde-redondeado); box-shadow: 0 10px 30px rgba(0,0,0,0.08);}
 .grupo-formulario { margin-bottom: 20px; }
 .grupo-formulario label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--color-primario); }
 .grupo-formulario input, .grupo-formulario textarea { width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: var(--borde-redondeado); font-family: 'Poppins', sans-serif; transition: var(--transicion); }
-.grupo-formulario input:focus, .grupo-formulario textarea:focus { outline: none; border-color: var(--color-secundario); box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2); }
+.grupo-formulario input:focus, .grupo-formulario textarea:focus { outline: none; border-color: var(--color-secundario); box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.2); }
 .grupo-formulario textarea { min-height: 150px; resize: vertical; }
 .boton-enviar { width: 100%; padding: 15px; background: var(--color-acento); color: white; border: none; border-radius: var(--borde-redondeado); font-size: 1rem; font-weight: 500; cursor: pointer; transition: var(--transicion); text-transform: uppercase; letter-spacing: 1px; }
-.boton-enviar:hover { background: #c0392b; transform: translateY(-3px); }
+.boton-enviar:hover { background: #c0392b; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4); }
 
 .info-contacto { text-align: center; margin-bottom: 40px; font-size: 1.1rem; line-height: 1.8; }
 .info-contacto p { margin-bottom: 10px; }
@@ -451,69 +567,106 @@ img {
     align-items: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 100;
-    transition: transform 0.3s ease;
+    transition: var(--transicion);
 }
-
 .whatsapp-float:hover {
-    transform: scale(1.1);
+    transform: scale(1.1) rotate(10deg);
 }
-
 .whatsapp-icon {
     width: 32px;
     height: 32px;
     fill: white;
 }
 
-/* Responsive */
-@media (max-width: 992px) {
-    .plan-recomendado {
-        transform: scale(1); /* Reset scale on smaller screens to avoid layout issues */
-    }
-}
-
-@media (max-width: 768px) {
-    body { padding-top: 0; }
-    .navbar { display: none; }
-    .contenido-home h1 { font-size: 2.5rem; }
-    .opciones { flex-direction: column; gap: 15px; }
-    .boton { width: 100%; text-align: center; }
-    .seccion-contenido { padding: 60px 15px; }
-    .formulario-contacto { padding: 30px 20px; }
-    .filter-buttons { gap: 10px; }
-    .filter-btn { padding: 8px 18px; font-size: 0.9rem; }
-    .grid-proyectos {
-        grid-template-columns: 1fr;
-        max-width: 340px;
-        margin: 0 auto;
-    }
-    .grid-planes {
-        grid-template-columns: 1fr;
-        max-width: 400px; /* Ancho máximo para las tarjetas de planes en móvil */
-        margin: 0 auto;
-    }
-     .plan-recomendado {
-        transform: scale(1.02); /* Slight scale for emphasis on mobile */
-         /* Mueve el plan recomendado al principio en la vista de una columna */
-    }
-    .whatsapp-float {
-        width: 50px;
-        height: 50px;
-        bottom: 20px;
-        right: 20px;
-    }
-    .whatsapp-icon {
-        width: 28px;
-        height: 28px;
-    }
-    /* --- Animación Fade-in para Secciones --- */
+/* --- Animación Fade-in para Secciones --- */
 .fade-in-section {
   opacity: 0;
-  transform: translateY(40px); /* Empieza 40px más abajo */
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.5, 0, 0, 1), transform 0.8s cubic-bezier(0.5, 0, 0, 1);
 }
 
 .fade-in-section.is-visible {
   opacity: 1;
-  transform: translateY(0); /* Vuelve a su posición original */
+  transform: translateY(0);
 }
+
+
+/* --- SECCIÓN RESPONSIVE --- */
+
+@media (max-width: 992px) {
+    .grid-servicios {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* === CAMBIOS PRINCIPALES PARA MÓVILES === */
+@media (max-width: 768px) {
+    /* CORRECCIÓN: Asegura que no haya espacio extra arriba */
+    body { padding-top: 0; }
+    
+    .nav-toggle { display: block; }
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(15px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+    .nav-menu.active { right: 0; }
+    .nav-menu a { font-size: 1.2rem; }
+    .nav-toggle.active .hamburger { background-color: transparent; }
+    .nav-toggle.active .hamburger::before { top: 0; transform: rotate(45deg); }
+    .nav-toggle.active .hamburger::after { bottom: 0; transform: rotate(-45deg); }
+    
+    #home.full-screen { height: 100vh; }
+    
+    /* CAMBIO: Reducción de padding para dar más espacio */
+    .contenido-home {
+        padding: 0 25px;
+    }
+    
+    /* CAMBIO: Reducción de fuente para evitar rupturas de palabras */
+    .contenido-home h1 {
+        font-size: 2.2rem; /* Reducido de 2.5rem */
+    }
+
+    /* CAMBIO: Ajuste de fuente del párrafo */
+    .contenido-home p {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    /* CAMBIO: Se desactiva la animación de escritura en móvil por una más simple */
+    .contenido-home p.typing-effect {
+        animation: none; /* Se quita la animación typing y blink */
+        width: auto; /* Se resetea el ancho */
+        border-right: none; /* Se quita el cursor */
+        white-space: normal; /* Se permite que el texto se divida en varias líneas */
+        opacity: 0; /* Empieza invisible para la nueva animación */
+        animation: fadeInSlideUp 0.8s ease-out 1.5s forwards; 
+    }
+    
+    .opciones { flex-direction: column; gap: 15px; }
+    .boton { width: 100%; text-align: center; }
+    .seccion-contenido { padding: 60px 15px; }
+
+    .grid-servicios {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .formulario-contacto { padding: 30px 20px; }
+    .filter-buttons { gap: 10px; }
+    .filter-btn { padding: 8px 18px; font-size: 0.9rem; }
+    .grid-proyectos { grid-template-columns: 1fr; max-width: 340px; margin: 0 auto; }
+    .grid-planes { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+    .plan-recomendado { order: -1; }
+    .whatsapp-float { width: 50px; height: 50px; bottom: 20px; right: 20px; }
+    .whatsapp-icon { width: 28px; height: 28px; }
 }
