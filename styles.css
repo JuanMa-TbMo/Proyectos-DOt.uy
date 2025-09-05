@@ -493,7 +493,7 @@ img {
     }
      .plan-recomendado {
         transform: scale(1.02); /* Slight scale for emphasis on mobile */
-        order: -1; /* Mueve el plan recomendado al principio en la vista de una columna */
+         /* Mueve el plan recomendado al principio en la vista de una columna */
     }
     .whatsapp-float {
         width: 50px;
@@ -505,4 +505,15 @@ img {
         width: 28px;
         height: 28px;
     }
+    /* --- Animación Fade-in para Secciones --- */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(40px); /* Empieza 40px más abajo */
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: translateY(0); /* Vuelve a su posición original */
+}
 }
