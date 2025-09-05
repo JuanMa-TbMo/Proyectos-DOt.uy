@@ -46,7 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
             projectGrid.classList.remove('fading-out');
         }, 300); // Este tiempo debe coincidir con la transición en CSS
     });
-    document.addEventListener('DOMContentLoaded', function() {
+
+    // --- RENDERIZADO INICIAL ---
+    renderProjects();
+});
+document.addEventListener('DOMContentLoaded', function() {
 
     // --- Lógica para la animación Fade-in de secciones ---
     const sections = document.querySelectorAll('.fade-in-section');
@@ -82,10 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
         yearSpan.textContent = new Date().getFullYear();
     }
     
-});
-
-    // --- RENDERIZADO INICIAL ---
-    renderProjects();
 });
 
 // Actualizar año del footer
