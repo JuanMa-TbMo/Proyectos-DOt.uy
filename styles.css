@@ -5,7 +5,8 @@
     --color-acento: #e74c3c;
     --color-texto: #333;
     --color-texto-claro: #fff;
-    --color-fondo: #f9f9f9;
+    --color-fondo: #ffffff;
+    --color-fondo-claro: #f5f7fa;
     --sombra: 0 4px 6px rgba(0, 0, 0, 0.1);
     --transicion: all 0.3s ease;
     --borde-redondeado: 8px;
@@ -51,7 +52,7 @@ img {
 }
 
 .bg-claro {
-    background-color: #f5f7fa;
+    background-color: var(--color-fondo-claro);
 }
 
 /* Navbar */
@@ -210,7 +211,141 @@ img {
 .servicio-icono { margin: 0 auto 20px; border-radius: 50%; }
 .servicio-item h3 { margin-bottom: 10px; color: var(--color-primario); }
 
+
+/* ======== NUEVOS ESTILOS PARA LA SECCIÓN DE PLANES ======== */
+.grid-planes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    align-items: stretch;
+}
+
+.plan-card {
+    background-color: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: var(--borde-redondeado);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transicion);
+    box-shadow: var(--sombra);
+    position: relative;
+    overflow: hidden;
+}
+
+.plan-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.plan-recomendado {
+    border: 2px solid var(--color-secundario);
+    transform: scale(1.05);
+}
+
+.plan-recomendado:hover {
+    transform: scale(1.08);
+}
+
+.plan-badge {
+    position: absolute;
+    top: 15px;
+    right: -45px;
+    background-color: var(--color-secundario);
+    color: white;
+    padding: 5px 40px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    transform: rotate(45deg);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.plan-header {
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+
+.plan-header h3 {
+    font-size: 1.8rem;
+    color: var(--color-primario);
+}
+
+.plan-tagline {
+    font-size: 1rem;
+    color: var(--color-secundario);
+    font-weight: 500;
+}
+
+.plan-descripcion {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 25px;
+    text-align: center;
+    flex-grow: 1; /* Empuja el botón hacia abajo */
+}
+
+.plan-features {
+    list-style: none;
+    margin-bottom: 30px;
+    padding: 0;
+    flex-grow: 2; /* Empuja el botón hacia abajo */
+}
+
+.plan-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 15px;
+    color: #444;
+}
+
+.plan-features svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: var(--color-secundario);
+    margin-top: 2px;
+}
+
+.boton-plan {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    border: 2px solid var(--color-secundario);
+    color: var(--color-secundario);
+    background-color: transparent;
+    border-radius: var(--borde-redondeado);
+    font-weight: 600;
+    transition: var(--transicion);
+    margin-top: auto; /* Se alinea al final */
+}
+
+.boton-plan:hover {
+    background-color: var(--color-secundario);
+    color: white;
+}
+
+.boton-plan-cta {
+    background-color: var(--color-secundario);
+    color: white;
+}
+
+.boton-plan-cta:hover {
+    background-color: #2980b9;
+    border-color: #2980b9;
+}
+/* ======== FIN DE LOS NUEVOS ESTILOS ======== */
+
+
 /* Sección Casos de Éxito */
+#casos-exito {
+    background-color: var(--color-fondo-claro);
+}
+
 .filter-buttons {
     display: flex;
     justify-content: center;
@@ -271,8 +406,11 @@ img {
 .etiqueta { display: inline-block; background: var(--color-secundario); color: white; padding: 5px 15px; border-radius: 50px; font-size: 0.8rem; margin: 0 20px 20px; }
 
 /* Sección Por Qué Elegirnos */
+#por-que-elegirnos {
+    background-color: #fff;
+}
 .grid-elegirnos { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-.elegirnos-item { background-color: white; padding: 30px; border-left: 5px solid var(--color-secundario); border-radius: var(--borde-redondeado); box-shadow: var(--sombra); }
+.elegirnos-item { background-color: var(--color-fondo-claro); padding: 30px; border-left: 5px solid var(--color-secundario); border-radius: var(--borde-redondeado); }
 .elegirnos-item h3 { margin-bottom: 10px; color: var(--color-primario); }
 
 /* Sección Nosotros (Simple) */
@@ -280,7 +418,7 @@ img {
 .contenido-nosotros-simple p { font-size: 1.1rem; color: #555; }
 
 /* Sección Contacto */
-.formulario-contacto { max-width: 700px; margin: 0 auto; background: white; padding: 40px; border-radius: var(--borde-redondeado); box-shadow: var(--sombra); }
+.formulario-contacto { max-width: 700px; margin: 0 auto; background: var(--color-fondo-claro); padding: 40px; border-radius: var(--borde-redondeado); }
 .grupo-formulario { margin-bottom: 20px; }
 .grupo-formulario label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--color-primario); }
 .grupo-formulario input, .grupo-formulario textarea { width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: var(--borde-redondeado); font-family: 'Poppins', sans-serif; transition: var(--transicion); }
@@ -327,6 +465,12 @@ img {
 }
 
 /* Responsive */
+@media (max-width: 992px) {
+    .plan-recomendado {
+        transform: scale(1); /* Reset scale on smaller screens to avoid layout issues */
+    }
+}
+
 @media (max-width: 768px) {
     body { padding-top: 0; }
     .navbar { display: none; }
@@ -341,6 +485,15 @@ img {
         grid-template-columns: 1fr;
         max-width: 340px;
         margin: 0 auto;
+    }
+    .grid-planes {
+        grid-template-columns: 1fr;
+        max-width: 400px; /* Ancho máximo para las tarjetas de planes en móvil */
+        margin: 0 auto;
+    }
+     .plan-recomendado {
+        transform: scale(1.02); /* Slight scale for emphasis on mobile */
+        order: -1; /* Mueve el plan recomendado al principio en la vista de una columna */
     }
     .whatsapp-float {
         width: 50px;
